@@ -1,62 +1,31 @@
 <!DOCTYPE html>
 <html lang="mn">
 <head>
-  <meta charset="UTF-8">
-  <title>Facebook Login Example</title>
+  <meta charset="UTF-8" />
+  <title>Firebase JS SDK Module Example</title>
 </head>
 <body>
-  <h2>Facebook Login жишээ</h2>
+  <h1>Firebase Module ашиглан эхлүүлэх</h1>
 
-  <!-- Facebook Login Button -->
-  <fb:login-button 
-    scope="public_profile,email"
-    onlogin="checkLoginState();">
-  </fb:login-button>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
 
-  <!-- User info will show here -->
-  <div id="status" style="margin-top: 20px;"></div>
-
-  <!-- Facebook SDK init -->
-  <div id="fb-root"></div>
-  <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '3323497244458151', // <-- Facebook App ID-г оруулсан
-        cookie     : true,
-        xfbml      : true,
-        version    : 'v19.0' // эсвэл таны ашиглаж буй хамгийн сүүлийн хувилбар
-      });
-
-      FB.AppEvents.logPageView();
+    const firebaseConfig = {
+      apiKey: "AIzaSyBV4u-BnfWUzjMGTY9QX7F_7JLDQJb-9-E",
+      authDomain: "jklh-a3950.firebaseapp.com",
+      projectId: "jklh-a3950",
+      storageBucket: "jklh-a3950.firebasestorage.app",  // Үүнийг зөв эсэхийг шалгаарай
+      messagingSenderId: "430561138430",
+      appId: "1:430561138430:web:97ed4a485fc200bf65f7af",
+      measurementId: "G-KM93VP4WK3"
     };
 
-    (function(d, s, id){
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
 
-    // Нэвтрэлтийн төлөв шалгах
-    function checkLoginState() {
-      FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
-      });
-    }
-
-    // Нэвтэрсэн эсэхийг шалгаж, хэрэглэгчийн мэдээлэл авах
-    function statusChangeCallback(response) {
-      if (response.status === 'connected') {
-        FB.api('/me', { fields: 'name,email' }, function(user) {
-          document.getElementById('status').innerHTML = 
-            'Сайн байна уу, ' + user.name + ' (' + user.email + ')';
-        });
-      } else {
-        document.getElementById('status').innerHTML = 
-          'Та Facebook-ээр нэвтрээгүй байна.';
-      }
-    }
+    // Жишээ болгон консолд үзүүлж байна
+    console.log("Firebase амжилттай эхэллээ", app);
   </script>
 </body>
 </html>
