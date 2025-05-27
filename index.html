@@ -1,31 +1,46 @@
 <!DOCTYPE html>
-<html lang="mn">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Firebase JS SDK Module Example</title>
+  <meta charset="UTF-8">
+  <title>Firebase Facebook Login</title>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
 </head>
 <body>
-  <h1>Firebase Module ашиглан эхлүүлэх</h1>
+  <h2>Facebook-р Firebase ашиглан нэвтрэх</h2>
+  <button onclick="loginWithFacebook()">Facebook-р нэвтрэх</button>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js";
+  <div id="userInfo" style="margin-top: 20px;"></div>
 
+  <script>
+    // ✅ Firebase config – та энд өөрийн бодит утгуудыг оруулна
     const firebaseConfig = {
-      apiKey: "AIzaSyBV4u-BnfWUzjMGTY9QX7F_7JLDQJb-9-E",
+      apiKey: "AIzaSyDxxxxxxxxxxxxxxxxxxxx",
       authDomain: "jklh-a3950.firebaseapp.com",
       projectId: "jklh-a3950",
-      storageBucket: "jklh-a3950.firebasestorage.app",  // Үүнийг зөв эсэхийг шалгаарай
-      messagingSenderId: "430561138430",
-      appId: "1:430561138430:web:97ed4a485fc200bf65f7af",
-      measurementId: "G-KM93VP4WK3"
+      appId: "1:1234567890:web:abcdef123456"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
+    // ✅ Firebase-г эхлүүлэх
+    firebase.initializeApp(firebaseConfig);
 
-    // Жишээ болгон консолд үзүүлж байна
-    console.log("Firebase амжилттай эхэллээ", app);
+    const provider = new firebase.auth.FacebookAuthProvider();
+
+    // ✅ Facebook-р нэвтрэх функц
+    function loginWithFacebook() {
+      firebase.auth().signInWithPopup(provider)
+        .then((result) => {
+          const user = result.user;
+          document.getElementById('userInfo').innerHTML =
+            `Сайн байна уу, ${user.displayName} (${user.email})`;
+        })
+        .catch((error) => {
+          console.error("Алдаа:", error);
+          alert("Алдаа: " + error.message);
+        });
+    }
   </script>
 </body>
-</html>
+</html>  энэ html-г ямар нэр өгч оруулах билээ?
