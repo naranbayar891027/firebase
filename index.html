@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Firebase Facebook Login</title>
-
+  
   <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
@@ -14,28 +14,20 @@
 
   <div id="userInfo" style="margin-top: 20px;"></div>
 
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyBV4u-BnfWUzjMGTY9QX7F_7JLDQJb-9-E",
-    authDomain: "jklh-a3950.firebaseapp.com",
-    projectId: "jklh-a3950",
-    storageBucket: "jklh-a3950.firebasestorage.app",
-    messagingSenderId: "430561138430",
-    appId: "1:430561138430:web:97ed4a485fc200bf65f7af",
-    measurementId: "G-KM93VP4WK3"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-</script>
-
+  <script>
+    // Таны Firebase тохиргоо - өөрийн Firebase Console-с авсан утгаасаа солих
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      appId: "YOUR_APP_ID"
     };
 
-    // ✅ Firebase-г эхлүүлэх
+    // Firebase-г эхлүүлэх
     firebase.initializeApp(firebaseConfig);
 
     const provider = new firebase.auth.FacebookAuthProvider();
 
-    // ✅ Facebook-р нэвтрэх функц
     function loginWithFacebook() {
       firebase.auth().signInWithPopup(provider)
         .then((result) => {
@@ -50,4 +42,4 @@
     }
   </script>
 </body>
-</html>  энэ html-г ямар нэр өгч оруулах билээ?
+</html>
